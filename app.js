@@ -11,6 +11,14 @@ app.get("/feriados/:ano", (req, res) => {
     });
 });
 
+app.get("ibge/:siglaUF", (req, res) => {
+  fetch(`https://brasilapi.com.br/api/ibge/municipios/v1/${req.params.siglaUF}?providers=dados-abertos-br,gov,wikipedia`)
+  .then((response => response.json())
+  .then((ibge) => {
+    res.send(`${ibge[0]}`)
+  }))
+})
+
 app.listen(port, () => {
   console.log(`Servidor rodando na porta ${port} rsrsrssrsrsrsrsrs`);
 });
